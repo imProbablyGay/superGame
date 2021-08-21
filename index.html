@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="scss/style.css">
+    <script src='js/app.js' defer></script>
+    <script src="js/gameStart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    
+<!-- game start -->
+<div class="game-start">
+    <div class="game-start__text"></div>
+</div>
+
+<div class="game-area">
+    <div class="player-item">
+        <img src="img/player-default.png" alt="">
+
+        <div class="collect-item-text">
+          press <span>E</span> to collect item
+        </div>
+    </div>
+</div>
+
+
+    <div class="timer"></div>
+
+    <!-- again modal -->
+    <div class="modal fade" id="again-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="again-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+              <p>Your score: <span class="modal-your-score"></span></p>
+              <p>Best score: <span class="modal-best-score"></span></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn modal-close-footer" data-bs-dismiss="modal">Play this wonderful game again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
