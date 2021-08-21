@@ -147,6 +147,11 @@ body {
     top: -120%;
     color:dimgray;
     display: none;
+    overflow: hidden;
+
+    &._active {
+        display: block;
+    }
 
     span {
         color:black;

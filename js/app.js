@@ -11,14 +11,14 @@ let pressedKey = null;
 let animStep;
 let keyCode;
 let gameScore = 0;
-let bestScore = localStorage.getItem('best-score');
+let bestScore = localStorage.getItem('best-score') || 0;
 let gameObj;
 let touched = false;
 let increaseStep = 5;
 
 
 // return default img & remove rotate
-document.addEventListener('keyup' , () => {
+document.addEventListener('keyup' , (e) => {
     keyPressed = false;
     pressedKey = null;
     keyCode = null;
@@ -26,8 +26,8 @@ document.addEventListener('keyup' , () => {
     player.src = 'img/player-default.png';
     player.style.transform = '';
 
-    if (doElsCollide(playerParent, gameObj)) {
-        collectText.style.display = 'block';
+    if (doElsCollide(playerParent, gameObj) && e.which != 69) {
+        collectText.classList.add('_active');
 
         // key event
         document.addEventListener('keydown' , collectItem);
@@ -35,7 +35,7 @@ document.addEventListener('keyup' , () => {
         touched = true;
 
     } else {
-        collectText.style.display = 'none';
+        collectText.classList.remove('_active');
         document.removeEventListener('keydown' , collectItem);
     }
 })
@@ -48,7 +48,7 @@ function movePlayer(e) {
 
     // collide
     if (doElsCollide(playerParent, gameObj)) {
-        collectText.style.display = 'block';
+        collectText.classList.add('_active');
 
         // key event
         document.addEventListener('keydown' , collectItem);
@@ -56,7 +56,7 @@ function movePlayer(e) {
         touched = true;
 
     } else {
-        collectText.style.display = 'none';
+        collectText.classList.remove('_active');
         document.removeEventListener('keydown' , collectItem);
     }
 
@@ -189,6 +189,14 @@ function gameTimer(time) {
             // remove move event
             document.removeEventListener('keydown', movePlayer);
 
+            // hide text
+            collectText.remove();
+
+            // audio
+            let audio = new Audio('./music/ukraina.mp3');
+            audio.volume = 1;
+            audio.play();
+
             clearInterval(timer);
 
             // open modal
@@ -196,6 +204,9 @@ function gameTimer(time) {
 
             modalBody.querySelector('.modal-your-score').innerHTML = gameScore;
             modalBody.querySelector('.modal-best-score').innerHTML = bestScore;
+
+            // stop player moving
+            document.dispatchEvent(new KeyboardEvent('keyup'));
         }
     }, 1000);
 
@@ -236,18 +247,23 @@ function randomInt(min, max) {
 
 function collectItem(e) {
     // if item already collected return
-    if (gameObj.classList.contains('_collected-object')) return false;
+    if (gameObj.classList.contains('_collected-object')) {
+        return false;
+    }
 
     // if e pressed
     if (e.which == 69) {
-        gameScore++;
-        console.log(gameScore);
+        // audio
+        let audio = new Audio('./music/sound.mp3');
+        audio.volume = 1;
+        audio.play();
 
+        gameScore++;
         // show score
         gameObj.querySelector('span').style.display = 'block';
 
         gameObj.classList.add('_collected-object');
-        collectText.style.display = 'none';
+        
 
         gameObj.ontransitionend = () => {
             gameObj.remove();

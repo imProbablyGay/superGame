@@ -155,6 +155,11 @@ body {
   top: -120%;
   color: dimgray;
   display: none;
+  overflow: hidden;
+}
+
+.collect-item-text._active {
+  display: block;
 }
 
 .collect-item-text span {
